@@ -1,0 +1,48 @@
+version: '3.3'
+services:
+  jet_nginx:
+    build: ./docker/nginx
+    ports:
+      - "88:80"
+    volumes:
+      - ./docker/nginx/conf:/etc/nginx/conf.d
+      - .:/var/www/html
+      - ./docker/nginx/log/:/var/log/nginx
+      - /tmp:/tmp
+    links:
+      - jet_php
+
+  jet_php:
+    build: ./docker/php
+    volumes:
+      - .:/var/www/html
+      - /tmp:/tmp
+      - ~/.composer:/var/www/.composer
+    links:
+      - jet_mysql
+
+  jet_mysql:
+    image: mysql:5.7
+    ports:
+      - "3386:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=jet_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    volumes:
+      - jet_mysql_data:/var/lib/mysql
+
+  jet_phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: jet_phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    ports:
+     - 8088:80
+    volumes:
+     - /sessions
+
+volumes:
+  jet_mysql_data:
