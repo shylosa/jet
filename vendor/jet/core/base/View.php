@@ -27,6 +27,7 @@ class View {
     }
 
     public function render($data){
+        if(is_array($data)) extract($data);
         $viewFile = APP . "/views/{$this->controller}/{$this->view}.php";
 
         if(is_file($viewFile)){
@@ -39,7 +40,6 @@ class View {
 
         if(false !== $this->layout){
             $layoutFile = APP . "/views/layouts/{$this->layout}.php";
-            echo $layoutFile;
             if(is_file($layoutFile)){
                 require_once $layoutFile;
             }else{
@@ -49,7 +49,11 @@ class View {
     }
 
     public function getMeta(){
-
+        $output = '<title>' . $this->meta['title'] . '</title>' . PHP_EOL;
+        $output .= '<meta name="description" content="' . $this->meta['desc'] . '">' . PHP_EOL;
+        $output .= '<meta name="keywords" content="' . $this->meta['keywords'] . '">' . PHP_EOL;
+        return $output;
     }
+
 
 }
