@@ -6,21 +6,33 @@ class Db
 {
     use TSingletone;
 
-    protected function __construct(){
-        $db = require_once CONF . '/config_db.php';
+    protected $pdo;
 
-        class_alias('\RedBeanPHP\R','\R');
-        \R::setup($db['dsn'], $db['user'], $db['pass']);
-
-        if( !\R::testConnection() ){
-            throw new \Exception("Нет соединения с БД", 500);
-        }
-
-        \R::freeze(true);
-
-        if(DEBUG){
-            \R::debug(true, 1);
-        }
+    protected function __construct()
+    {
+        $db = require ROOT . '/config/config_db.php';
+        $options = [
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
+        ];
+        $this->pdo = new \PDO($db['dsn'], $db['user'], $db['pass'], $options);
     }
 
+    public function execute($sql)
+    {
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute();
+    }
+
+    public function query($sql)
+    {
+        $stmt = $this->pdo->prepare($sql);
+        $res = $stmt->execute();
+
+        if ($res !== false) {
+            return $stmt->fetchAll();
+        }
+
+        return [];
+    }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace jet;
-
 
 trait TSingletone
 {

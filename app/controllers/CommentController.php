@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-class PageController extends AppController
+class CommentController extends AppController
 {
 
     public function viewAction()
