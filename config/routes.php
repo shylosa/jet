@@ -2,9 +2,7 @@
 
 use jet\Router;
 
-Router::add('^post', ['controller' => 'Post', 'action' => 'view']);
-
-//Router::add('^post/\?id=(?P<id>\d+)$', ['controller' => 'Post', 'action' => 'view']);
+Router::add('^post$', ['controller' => 'Post', 'action' => 'view']);
 
 // default routes
 Router::add('^$', ['controller' => 'Post', 'action' => 'index']);

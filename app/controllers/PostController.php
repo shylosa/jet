@@ -19,9 +19,10 @@ class PostController extends AppController
     {
 
         $model = new Post;
-        $post = $model->findOne(9);
+        $posts = $model->findOne(Router::getParamUrl());
 
-        $this->set(compact('post'));
-        var_dump($model);
+        $this->set(compact('posts'));
+
+
     }
 }

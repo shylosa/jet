@@ -7,6 +7,15 @@ class Router
 
     protected static $routes = [];
     protected static $route = [];
+    protected static $paramUrl;
+
+    /**
+     * @return mixed
+     */
+    public static function getParamUrl()
+    {
+        return self::$paramUrl;
+    }
 
     public static function add($regexp, $route = [])
     {
@@ -89,9 +98,10 @@ class Router
     protected static function removeQueryString($url)
     {
         if ($url) {
-            $params = explode('&', $url, 2);
-            var_dump($params);
+            $params = explode('?', $url, 2);
             if (false === strpos($params[0], '=')) {
+
+                self::$paramUrl = explode('=', $url, 2)[1];
                 return rtrim($params[0], '/');
             } else {
                 return '';

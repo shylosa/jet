@@ -32,12 +32,14 @@ abstract class Model
             case 'DESC':
                 $sql = "SELECT * FROM ($this->table) ORDER BY published_at DESC";
         }
+
         return $this->pdo->query($sql);
     }
 
     public function findOne($id, $field = ''){
-        $field = $field ? : $this->pk;
-        $sql = "SELECT * FROM ($this->table) WHERE $field = ? LIMIT 1";
+        $field = $field ?: $this->pk;
+        $sql = "SELECT * FROM ($this->table) WHERE $field = ?";
+
         return $this->pdo->query($sql, [$id]);
     }
 
