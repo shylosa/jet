@@ -8,6 +8,8 @@ abstract class Model
 {
     protected $pdo;
     protected $table;
+    protected $pk = 'id';
+    protected $sort = 'NO_SORT';
 
     public $attributes = [];
     public $errors = [];
@@ -21,9 +23,22 @@ abstract class Model
         return $this->pdo->execute($sql);
     }
 
-    public function findAll(){
-        $sql = "SELECT * FROM ($this->table)";
+    public function findAll($sort = ''){
+        switch ($sort){
+            case 'NO_SORT':
+                $sql = "SELECT * FROM ($this->table)";
+            case 'ASC':
+                $sql = "SELECT * FROM ($this->table) ORDER BY published_at";
+            case 'DESC':
+                $sql = "SELECT * FROM ($this->table) ORDER BY published_at DESC";
+        }
         return $this->pdo->query($sql);
+    }
+
+    public function findOne($id, $field = ''){
+        $field = $field ? : $this->pk;
+        $sql = "SELECT * FROM ($this->table) WHERE $field = ? LIMIT 1";
+        return $this->pdo->query($sql, [$id]);
     }
 
 }

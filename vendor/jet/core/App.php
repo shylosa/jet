@@ -9,7 +9,10 @@ class App
 
     public function __construct()
     {
-        $query = trim($_SERVER['QUERY_STRING'], '/');
+        $query = trim($_SERVER['REQUEST_URI'], '/');
+        var_dump($query);
+        //$query = trim($_SERVER['QUERY_STRING'], '/');
+
         session_start();
         self::$app = Registry::instance();
         $this->getParams();
@@ -25,5 +28,19 @@ class App
                 self::$app->setProperty($key, $value);
             }
         }
+    }
+
+    protected function getUriParams()
+    {
+        $url = $_SERVER['REQUEST_URI'];
+        $url = explode('?', $url);
+        $uri = $url[0] . '?';
+        if( isset($url[1]) && $url[1] !=''){
+            $params = explode('&', $url[1]);
+            foreach ($params as $param) {
+                if(!preg_match("#id=#", $param)) $uri .= "{$param}&amp;" ;
+            }
+        }
+        return $uri;
     }
 }

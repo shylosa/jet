@@ -18,16 +18,16 @@ class Db
         $this->pdo = new \PDO($db['dsn'], $db['user'], $db['pass'], $options);
     }
 
-    public function execute($sql)
+    public function execute($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute();
+        return $stmt->execute($params);
     }
 
-    public function query($sql)
+    public function query($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
-        $res = $stmt->execute();
+        $res = $stmt->execute($params);
 
         if ($res !== false) {
             return $stmt->fetchAll();

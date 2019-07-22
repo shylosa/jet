@@ -90,6 +90,7 @@ class Router
     {
         if ($url) {
             $params = explode('&', $url, 2);
+            var_dump($params);
             if (false === strpos($params[0], '=')) {
                 return rtrim($params[0], '/');
             } else {
