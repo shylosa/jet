@@ -12,6 +12,24 @@ class Comment extends AppModel
 
     private $publishedAt;
 
+    private $post_id;
+
+    /**
+     * @return mixed
+     */
+    public function getPostId()
+    {
+        return $this->post_id;
+    }
+
+    /**
+     * @param mixed $post_id
+     */
+    public function setPostId($post_id): void
+    {
+        $this->post_id = $post_id;
+    }
+
     /**
      * Comment constructor.
      */

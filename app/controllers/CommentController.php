@@ -5,7 +5,7 @@ namespace app\controllers;
 class CommentController extends AppController
 {
 
-    public function viewAction()
+    public function indexAction()
     {
         echo __METHOD__;
     }
