@@ -31,7 +31,7 @@ class PostController extends AppController
                         text_comment
                     FROM comment_table
                     WHERE post_id = $postId
-                    ORDER BY published_at"
+                    ORDER BY published_at ASC"
         );
         $this->set(compact('posts', 'comments'));
 

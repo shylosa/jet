@@ -1,5 +1,8 @@
 <?php if(!empty($posts)):?>
+
 <div class="container">
+
+
 
     <?php foreach ($posts as $post): ?>
 
@@ -17,3 +20,4 @@
     <?php endforeach; ?>
 <div>
 <?php endif;?>
+
