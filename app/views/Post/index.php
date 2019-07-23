@@ -9,7 +9,9 @@
             <h6 class="card-subtitle mb-2 text-muted">
                 <?= 'Автор: ' . $post['author'] . ' | Опубликовано: ' .  $post['published_at'] ?>
             </h6>
-            <p class="card-text"><?= mb_substr($post['text_post'], 0, 100) . '...' ?></p>
+            <p class="card-text"><?= mb_substr($post['text_post'], 0, 100) . '...' ?>
+              <div class="card-subtitle mb-2 text-muted">Комментарии: <?=$post['comment_qty']?></div>
+            </p>
             <a href="/post/?id=<?=$post['id']?>" class="card-link">(Читать полностью)</a>
           </div>
         </div>

@@ -2,8 +2,6 @@
 
 <div class="container">
 
-
-
     <?php foreach ($posts as $post): ?>
 
         <div class="card mb-md-3">
