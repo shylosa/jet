@@ -19,3 +19,18 @@
     <?php endforeach; ?>
 <div>
 <?php endif;?>
+
+  <!--Form start -->
+  <form method="post" action="" >
+    <div class="form-group">
+      <h5><label for="exampleInputEmail1">Create new post</label></h5>
+
+      <input type="text" name="author" class="form-control" id="exampleInputName" aria-describedby="NameHelp"
+             placeholder="Enter your name">
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" id="exampleInputMessage" name="text_post" placeholder="Message"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create post</button>
+  </form>
+  <!--Form end -->

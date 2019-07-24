@@ -2,7 +2,7 @@
 
 use jet\Router;
 
-Router::add('^post$', ['controller' => 'Post', 'action' => 'view']);
+Router::add('^post$', ['controller' => 'Comment', 'action' => 'index']);
 
 // default routes
 Router::add('^$', ['controller' => 'Post', 'action' => 'index']);

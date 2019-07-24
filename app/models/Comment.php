@@ -14,6 +14,19 @@ class Comment extends AppModel
 
     private $post_id;
 
+    public $attributes = [
+        'author' => '',
+        'text_comment' => '',
+        'post_id' => '',
+    ];
+
+    public $rules = [
+        'required' => [
+            ['author'],
+            ['text_comment'],
+        ],
+    ];
+
     /**
      * @return mixed
      */
@@ -36,6 +49,7 @@ class Comment extends AppModel
     public function __construct()
     {
         Model::__construct();
+        $this->table = 'comment_table';
     }
 
     /**
