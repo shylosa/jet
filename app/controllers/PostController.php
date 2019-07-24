@@ -9,6 +9,24 @@ class PostController extends AppController
 {
     public function indexAction(): void
     {
+        if(!empty($_POST)){
+            $post = new Post;
+            $data = $_POST;
+            $post->load($data);
+
+            if(!$post->validate($data)){
+                $post->getErrors();
+                redirect();
+            }
+
+            if($post->save($post->getTable())){
+                $_SESSION['success'] = "Вы успешно добавили пост!";
+            } else {
+                $_SESSION['success'] = "Ошибка. Попробуйте снова.";
+            }
+            redirect();
+        }
+
         $model = new Post;
         $posts = $model->findBySql(
             'SELECT post_table.* ,
@@ -28,7 +46,6 @@ class PostController extends AppController
                         LIMIT 5;');
 
         $this->set(compact('posts','popularPosts'));
-
     }
 
     public function viewAction(): void

@@ -9,8 +9,21 @@
 </head>
 <title><?= jet\App::$app->getProperty('blog_name');?></title>
 <body>
-  <h1><a class="navbar-brand ml-4 mr-md-2" href="/"><?= jet\App::$app->getProperty('blog_name');?></a></h1>
 
+  <h1><a class="navbar-brand ml-4 mr-md-2" href="/"><?= jet\App::$app->getProperty('blog_name');?></a></h1>
+  <div class="container">
+      <?php if(isset($_SESSION['error'])):?>
+        <div class="alert alert-danger" role="alert">
+            <?= $_SESSION['error']; unset($_SESSION['error']);?>
+        </div>
+      <?php endif;?>
+
+      <?php if(isset($_SESSION['success'])):?>
+        <div class="alert alert-success" role="alert">
+            <?= $_SESSION['success']; unset($_SESSION['success']); ?>
+        </div>
+      <?php endif;?>
+  </div>
   <?php if(!empty($popularPosts)):?>
     <h3 class="ml-4 mr-md-2">Популярные записи</h3>
     <div class="container" style="background: #26D0FF">
@@ -32,6 +45,22 @@
   <?php endif;?>
 
   <?= $content; ?>
+
+
+  <!--Form start -->
+  <form method="post" action="" >
+    <div class="form-group">
+      <h5><label for="exampleInputEmail1">Create new post</label></h5>
+
+      <input type="text" name="author" class="form-control" id="exampleInputName" aria-describedby="NameHelp"
+             placeholder="Enter your name">
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" id="exampleInputMessage" name="text_post" placeholder="Message"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create post</button>
+  </form>
+  <!--Form end -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

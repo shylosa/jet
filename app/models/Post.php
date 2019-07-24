@@ -14,6 +14,18 @@ class Post extends AppModel
 
     private $popular;
 
+    public $attributes = [
+        'author' => '',
+        'text_post' => '',
+    ];
+
+    public $rules = [
+        'required' => [
+            ['author'],
+            ['text_post'],
+        ],
+    ];
+
     /**
      * Post constructor.
      */
